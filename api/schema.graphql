@@ -1,0 +1,54 @@
+# Employee Job Titles allowed
+enum Title {
+    Employee,
+    Manager,
+    Director,
+    VP
+}
+
+# Departments allowed
+enum Department {
+    IT,
+    Marketing,
+    HR,
+    Engineering
+}
+
+# Employee Types allowed
+enum EmployeeType {
+    FullTime,
+    PartTime,
+    Contract,
+    Seasonal
+}
+
+type Employee {
+    _id: ID
+    first_name: String
+    last_name: String
+    age: Int
+    date_of_joining: String
+    title: Title
+    department: Department
+    employee_type: EmployeeType
+    current_status: Int
+}
+
+input EmployeeInput {
+    first_name: String
+    last_name: String
+    age: Int
+    date_of_joining: String
+    title: Title
+    department: Department
+    employee_type: EmployeeType
+    current_status: Int
+}
+
+type Query {
+    employeesList: [Employee!]!
+}
+
+type Mutation {
+    createEmployee(employee: EmployeeInput!): Employee
+}
