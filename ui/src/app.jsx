@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EmployeeDirectory from './components/EmployeeDirectory';
+import { HashRouter as Router } from "react-router-dom";
+import Page from './routes/Page';
 
-const element = <EmployeeDirectory />;
+// const element = <EmployeeDirectory />;
+const element = (
+    <Router>
+        <Page />
+    </Router>
+)
 ReactDOM.render(element, document.getElementById('contents'));

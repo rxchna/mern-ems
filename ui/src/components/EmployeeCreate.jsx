@@ -154,7 +154,7 @@ export default class EmployeeCreate extends React.Component {
                         </select>
                     </div>
                     <div className="form-field">
-                        <button style={btnStyle}>Add</button>
+                        <button style={btnStyle} className="form-button">Add</button>
                     </div>
                 </form>
             </div>
