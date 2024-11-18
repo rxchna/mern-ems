@@ -1,6 +1,6 @@
 import React from "react";
 import EMSHeader from "../components/EMSHeader";
-import EmployeeSearch from "../components/EmployeeSearch";
+import EmployeeFilter from "../components/EmployeeFilter";
 import EmployeeTable from "../components/EmployeeTable";
 
 // Parent component that includes all other components
@@ -10,14 +10,20 @@ export default class EmployeeDirectory extends React.Component {
 
         // State to store employees
         this.state = { employeesList: [] };
-
-        // this.createEmployee = this.createEmployee.bind(this);
     }
 
     async loadEmployeesData() {
 
-        const query = `query {
-            employeesList {
+        const { search } = this.props.location;
+        const params = new URLSearchParams(search);
+        const variables = {};
+
+        if(params.get('employee_type')) {
+            variables.employee_type = params.get('employee_type');
+        }
+
+        const query = `query($employee_type: EmployeeType) {
+            employeesList(employee_type: $employee_type) {
                 _id,
                 first_name,
                 last_name,
@@ -33,7 +39,7 @@ export default class EmployeeDirectory extends React.Component {
         const response = await fetch('/graphql', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query })
+            body: JSON.stringify({ query, variables })
         });
 
         const result = await response.json();
@@ -41,7 +47,15 @@ export default class EmployeeDirectory extends React.Component {
         this.setState({ employeesList: result.data.employeesList });
     }
 
-    componentDidMount() {
+    componentDidUpdate(prevProps) { 
+        const prevSearch = prevProps.location.search; 
+        const search = this.props.location.search;
+        if (prevSearch !== search) { 
+            this.loadEmployeesData();
+        }
+    }
+
+    componentDidMount(prevProps) {
         this.loadEmployeesData();
     }
 
@@ -51,7 +65,7 @@ export default class EmployeeDirectory extends React.Component {
                 <EMSHeader />
                 <div className="ems-container">
                     <div>
-                        <EmployeeSearch />
+                        <EmployeeFilter />
                         <EmployeeTable employees={this.state.employeesList} />
                     </div>
                 </div>

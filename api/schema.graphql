@@ -46,7 +46,7 @@ input EmployeeInput {
 }
 
 type Query {
-    employeesList: [Employee!]!
+    employeesList(employee_type:EmployeeType): [Employee!]!
 }
 
 type Mutation {
