@@ -43,7 +43,6 @@ export default class EmployeeDirectory extends React.Component {
         });
 
         const result = await response.json();
-        console.log("Result being returned: ", result);
         this.setState({ employeesList: result.data.employeesList });
     }
 
@@ -55,7 +54,7 @@ export default class EmployeeDirectory extends React.Component {
         }
     }
 
-    componentDidMount(prevProps) {
+    componentDidMount() {
         this.loadEmployeesData();
     }
 

@@ -20,6 +20,7 @@ export default class EmployeeTable extends React.Component {
                             <th style={headerStyle}>Department</th>
                             <th style={headerStyle}>Employee Type</th>
                             <th style={headerStyle}>Current Status</th>
+                            <th style={headerStyle}>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,7 +32,7 @@ export default class EmployeeTable extends React.Component {
                         ) : (
                             // No employees availble message
                             <tr>
-                                <td colSpan="8" style={{ textAlign: "center", padding: "10px", fontStyle: "italic" }}>
+                                <td colSpan="9" style={{ textAlign: "center", padding: "10px", fontStyle: "italic" }}>
                                     No available employees. {this.props.employees}
                                 </td>
                             </tr>

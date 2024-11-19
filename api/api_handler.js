@@ -9,10 +9,12 @@ const employees = require('./employees');
 */
 const resolvers = {
     Query: {
-        employeesList: employees.employeesList
+        employeesList: employees.employeesList,
+        getEmployee: employees.getEmployee
     },
     Mutation: {
-        createEmployee: employees.createEmployee
+        createEmployee: employees.createEmployee,
+        updateEmployee: employees.updateEmployee
     }
 };
 
