@@ -1,4 +1,5 @@
 const { getDb } = require('./db');
+const { ObjectId } = require('mongodb');
 
 // Method to get all employees
 async function employeesList(_, { employee_type }) {
@@ -30,4 +31,33 @@ async function createEmployee(_, {employee: employee}) {
     return savedEmployee;
 }
 
-module.exports = { createEmployee, employeesList };
+// Method to get a single employee by ID
+async function getEmployee(_, { id }) {
+    const db = getDb();
+
+    // Retrieve employee data
+    const employee = await db.collection('employees').findOne({ _id: new ObjectId(id) });
+    return employee;
+}
+
+// Method to update an employee
+async function updateEmployee(_, { id, employee }) {
+    const db = getDb();
+
+    // Remove the _id field from the employee object, since it is not needed for update
+    const { _id, ...updateFields } = employee;
+    // Update employee record
+    const result = await db.collection('employees').updateOne(
+        { _id: new ObjectId(id) },
+        {
+            $set: updateFields
+        }
+    );
+
+    // Return updated employee data
+    const updatedEmployee = await db.collection('employees').findOne({ _id: new ObjectId(id) });
+    return updatedEmployee;
+}
+
+
+module.exports = { createEmployee, employeesList, getEmployee, updateEmployee };

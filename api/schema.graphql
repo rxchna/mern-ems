@@ -47,8 +47,10 @@ input EmployeeInput {
 
 type Query {
     employeesList(employee_type:EmployeeType): [Employee!]!
+    getEmployee(id: ID!): Employee
 }
 
 type Mutation {
     createEmployee(employee: EmployeeInput!): Employee
+    updateEmployee(id: ID!, employee: EmployeeInput!): Employee
 }

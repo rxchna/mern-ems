@@ -99,7 +99,7 @@ export default class EmployeeCreate extends React.Component {
     render() {
         const formStyle = { borderRadius: 5, backgroundColor: "#fff", borderRadius: 5 };
         const elementStyle = { marginTop: "0.7em", marginBottom: "0.7em", width: "100%" };
-        const btnStyle = { marginTop: "1.5em", marginBottom: "1.5em", borderRadius: "1em", backgroundColor: "orange", border: "none", textTransform: "uppercase", letterSpacing: 1 };
+        const btnStyle = { marginTop: "1.5em", marginBottom: "1.5em", borderRadius: "1em", backgroundColor: "orange", border: "none", textTransform: "uppercase", letterSpacing: 1, color: "white" };
 
         return (
             <div className="section form-container">

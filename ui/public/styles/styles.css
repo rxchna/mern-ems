@@ -101,7 +101,7 @@ button {
 
 .page-container {
     display: grid;
-    grid-template-columns: 18em auto;
+    grid-template-columns: 17em auto;
 }
 
 nav {
@@ -177,13 +177,58 @@ nav a:hover {
     background-color: black;
 }
 
-/* .filter-icon {
-    width: 2em;
-    margin-right: 1em;
-} */
-
 .nav-active {
     background-color: red;
+}
+
+.action-links-container {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.action-links {
+    padding: 0.7em;
+    text-decoration: none;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.15);
+    color: white;
+    width: 3em;
+}
+
+.action-links:hover {
+    filter: brightness(80%);
+}
+
+.view-form form {
+    padding-bottom: 2em;
+}
+
+.view-form input {
+    cursor: default;
+}
+
+.view-form input:focus {
+    outline: none;
+}
+
+.view-form .action-links-container {
+    margin-top: 1.3em;
+    gap: 4em;
+}
+
+.view-form .action-links-container a {
+    width: 10em;
+    padding: 1em;
+    border-radius: 1em;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 @media all and (max-width: 1250px) {

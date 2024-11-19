@@ -35,18 +35,17 @@ export default class EmployeeCreatePage extends React.Component {
 
         const result = await response.json();
         console.log("Created employee: ", result);
-        // this.loadEmployeesData();
     }
 
     render() {
         return (
             <div className="main-container">
-            <EMSHeader />
-            <div className="ems-container">
-                <div class="form-main-container">
-                    <EmployeeCreate createEmployee={this.createEmployee} /> 
+                <EMSHeader />
+                <div className="ems-container">
+                    <div className="form-main-container">
+                        <EmployeeCreate createEmployee={this.createEmployee} /> 
+                    </div>
                 </div>
-            </div>
             </div>
         );
     }
