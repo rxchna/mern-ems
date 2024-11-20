@@ -59,5 +59,15 @@ async function updateEmployee(_, { id, employee }) {
     return updatedEmployee;
 }
 
+// Method to delete employee
+async function deleteEmployee(_, { id }) {
+    const db = getDb();
 
-module.exports = { createEmployee, employeesList, getEmployee, updateEmployee };
+    const result = await db.collection('employees').deleteOne({ _id: new ObjectId(id) });
+
+    // If `result.deletedCount` = 1 -> deletion successful
+    return result.deletedCount === 1;
+}
+
+
+module.exports = { createEmployee, employeesList, getEmployee, updateEmployee, deleteEmployee };

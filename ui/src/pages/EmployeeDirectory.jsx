@@ -8,8 +8,9 @@ export default class EmployeeDirectory extends React.Component {
     constructor() {
         super();
 
-        // State to store employees
-        this.state = { employeesList: [] };
+        this.state = {
+            employeesList: [], // State to store employees
+        };
     }
 
     async loadEmployeesData() {

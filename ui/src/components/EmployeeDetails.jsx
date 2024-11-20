@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import formatDate from "./FormatDate";
+import EmployeeDeleteConfirmation from "./EmployeeDeleteConfirmation";
+import SuccessPopUp from "./SuccessPopUp";
 
 // Employee view component
 export default function EmployeeDetails({ employee, mode }) {
-
+    const [showDeleteModal, setShowDeleteModal] = useState(false); // Manage the delete confirmation modal visibility for delete
+    const [showUpdateModal, setShowUpdateModal] = useState(false); // Manage the update success modal visibility
+    
     // Check if employee data is available before rendering the form
     if (!employee) {
         return <div>Loading...</div>;
@@ -43,7 +47,6 @@ export default function EmployeeDetails({ employee, mode }) {
             }
         }`;
 
-        console.log("Mutation query: ", query);
         const response = await fetch('/graphql', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -53,8 +56,8 @@ export default function EmployeeDetails({ employee, mode }) {
         const result = await response.json();
         console.log("Updated employee final: ", result);
         
-        // TODO: show a success message 
-        // ...
+        // Function to show popup on click of update button
+        setShowUpdateModal(true);
     }
 
     function handleSubmit(e) {
@@ -74,6 +77,12 @@ export default function EmployeeDetails({ employee, mode }) {
         // Update employee
         updateEmployee(updated_employee);
     }
+
+    // Function to show popup on click of delete button
+    const handleDeleteClick = (e) => {
+        e.preventDefault();
+        setShowDeleteModal(true);
+    };
 
     const formStyle = { borderRadius: 5, backgroundColor: "#fff", borderRadius: 5 };
     const elementStyle = { marginTop: "0.7em", marginBottom: "0.7em", width: "100%" };
@@ -149,7 +158,8 @@ export default function EmployeeDetails({ employee, mode }) {
                 {mode === 'view' ? (
                     <div className="form-field action-links-container">
                         <a href={`/#/edit/${employee._id}`} className="action-links" style={editBtnStyle}>Edit</a>
-                        <a href={`/#/delete/${employee._id}`} className="action-links" style={deleteBtnStyle}>Delete</a>
+                        <a href="#" onClick={handleDeleteClick} className="action-links" style={deleteBtnStyle}>Delete</a>
+
                     </div>
                 ) : (
                     <div className="form-field">
@@ -157,6 +167,27 @@ export default function EmployeeDetails({ employee, mode }) {
                     </div>
                 )}
             </form>
+
+            {/* Pass state and handlers to DeleteConfirmation component */}
+            {showDeleteModal && (
+                <EmployeeDeleteConfirmation
+                    employeeId={employee._id}
+                    onCancel={() => setShowDeleteModal(false)}
+                    onSuccess={() => {
+                        setShowDeleteModal(false);
+                    }}
+                />
+            )}
+
+            {/* Pass state and handlers to Update Success component */}
+            {showUpdateModal && (
+                <SuccessPopUp
+                    type="update"
+                    onSuccess={() => {
+                        setShowUpdateModal(false);
+                    }}
+                />
+            )}
         </div>
     );
 }

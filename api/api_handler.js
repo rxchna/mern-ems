@@ -14,7 +14,8 @@ const resolvers = {
     },
     Mutation: {
         createEmployee: employees.createEmployee,
-        updateEmployee: employees.updateEmployee
+        updateEmployee: employees.updateEmployee,
+        deleteEmployee: employees.deleteEmployee
     }
 };
 
