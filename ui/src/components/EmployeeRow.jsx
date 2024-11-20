@@ -1,6 +1,6 @@
 import React from "react";
-import ActionButtons from "./TableActions";
 import formatDate from "./FormatDate";
+import TableActions from "./TableActions";
 
 // Employee row component
 export default class EmployeeRow extends React.Component {
@@ -19,7 +19,7 @@ export default class EmployeeRow extends React.Component {
                 <td style={CSSstyle}> {employee.department} </td>
                 <td style={CSSstyle}> {employee.employee_type} </td>
                 <td style={CSSstyle}> {employee.current_status} </td>
-                <td style={CSSstyle}> <ActionButtons employee={employee} /> </td>
+                <td style={CSSstyle}> <TableActions employee={employee} /> </td>
             </tr>
         );
     }

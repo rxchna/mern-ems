@@ -1,5 +1,6 @@
 import React from "react";
 import FormFieldError from "./FormFieldError";
+import SuccessPopUp from "./SuccessPopUp";
 
 // Create employee component
 export default class EmployeeCreate extends React.Component {
@@ -8,8 +9,11 @@ export default class EmployeeCreate extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
         // State to store employee input errors
-        this.state = { errors: [] };
-    }
+        this.state = { 
+            errors: [],
+            isUpdateModalVisible: false // Update message modal visibility state
+        }
+    };
 
     // Function to validate user input
     validateInput(employee) {
@@ -91,6 +95,9 @@ export default class EmployeeCreate extends React.Component {
             // Create employee
             this.props.createEmployee(employee);
 
+            // Show confirmation message modal
+            this.state.isUpdateModalVisible = true;
+
             // Clear form
             this.clearForm(forms);
         }
@@ -157,6 +164,20 @@ export default class EmployeeCreate extends React.Component {
                         <button style={btnStyle} className="form-button">Add</button>
                     </div>
                 </form>
+
+                {/* Pass state and handlers to Update Success component */}
+                {this.state.isUpdateModalVisible && (
+                    <SuccessPopUp
+                        type="create"
+                        onSuccess={() => {
+                            this.setState({
+                                isUpdateModalVisible: false
+                            });
+                            // Redirect to home page
+                            window.location.href = "/";
+                        }}
+                    />
+                )}
             </div>
         );
     }
